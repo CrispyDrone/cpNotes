@@ -1,0 +1,19 @@
+#!/bin/bash
+if [ ! -d "$1" ] || [ ! -d "$2" ]
+then
+	echo "Not a valid directory"
+	exit 1
+fi
+
+if [ "$1" == "$2" ]
+then
+	echo "Output directory can not be the same as input directory"
+	exit 1
+fi
+
+# problem is this will never delete files, and i have a hunch that it is not possible for cp to delete files...
+# cp -uriP "$1"/* "$2"
+
+# maybe use rsync instead??
+rsync -avu --delete "$1" "$2"
+
